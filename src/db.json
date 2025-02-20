@@ -6,8 +6,7 @@
         "domain": "xyz.com",
         "status": "pending",
         "version": "2.1",
-        "os": "macOS Monterey",
-        "bg": "ghostwhite"
+        "os": "macOS Monterey"
     },
     {
         "name": "DeviceB",
@@ -16,8 +15,7 @@
         "domain": "abc.com",
         "status": "installed",
         "version": "3.2",
-        "os": "Windows 11",
-        "bg": "lightgray"
+        "os": "Windows 11"
     },
     {
         "name": "ServerX",
@@ -26,8 +24,7 @@
         "domain": "cloud.net",
         "status": "error",
         "version": "5.0",
-        "os": "Ubuntu 22.04",
-        "bg": "ghostwhite"
+        "os": "Ubuntu 22.04"
     },
     {
         "name": "DeviceC",
@@ -36,8 +33,7 @@
         "domain": "xyz.com",
         "status": "offline",
         "version": "1.5",
-        "os": "Windows 10",
-        "bg": "lightgray"
+        "os": "Windows 10"
     },
     {
         "name": "RaspberryPi",
@@ -46,8 +42,7 @@
         "domain": "iot.local",
         "status": "active",
         "version": "4.3",
-        "os": "Raspberry Pi OS",
-        "bg": "ghostwhite"
+        "os": "Raspberry Pi OS"
     },
     {
         "name": "LaptopZ",
@@ -56,8 +51,7 @@
         "domain": "abc.com",
         "status": "installed",
         "version": "2.8",
-        "os": "Windows 10",
-        "bg": "lightgray"
+        "os": "Windows 10"
     },
     {
         "name": "MacBookPro",
@@ -66,8 +60,7 @@
         "domain": "apple.com",
         "status": "pending",
         "version": "3.9",
-        "os": "macOS Ventura",
-        "bg": "ghostwhite"
+        "os": "macOS Ventura"
     },
     {
         "name": "WorkstationX",
@@ -76,8 +69,7 @@
         "domain": "enterprise.com",
         "status": "deployed",
         "version": "4.0",
-        "os": "Windows Server 2019",
-        "bg": "lightgray"
+        "os": "Windows Server 2019"
     },
     {
         "name": "TabletP",
@@ -86,8 +78,7 @@
         "domain": "mobile.org",
         "status": "active",
         "version": "1.8",
-        "os": "Android 12",
-        "bg": "ghostwhite"
+        "os": "Android 12"
     },
     {
         "name": "GamingRig",
@@ -96,8 +87,7 @@
         "domain": "gaming.net",
         "status": "running",
         "version": "5.5",
-        "os": "Windows 11",
-        "bg": "lightgray"
+        "os": "Windows 11"
     },
     {
         "name": "CloudServerA",
@@ -106,8 +96,7 @@
         "domain": "aws.com",
         "status": "online",
         "version": "6.2",
-        "os": "Linux Debian 11",
-        "bg": "ghostwhite"
+        "os": "Linux Debian 11"
     },
     {
         "name": "NASDevice",
@@ -116,8 +105,7 @@
         "domain": "backup.local",
         "status": "idle",
         "version": "2.3",
-        "os": "Synology DSM 7",
-        "bg": "lightgray"
+        "os": "Synology DSM 7"
     },
     {
         "name": "WorkstationY",
@@ -126,8 +114,7 @@
         "domain": "enterprise.com",
         "status": "offline",
         "version": "3.4",
-        "os": "Windows 10",
-        "bg": "ghostwhite"
+        "os": "Windows 10"
     },
     {
         "name": "EmbeddedSys1",
@@ -136,8 +123,7 @@
         "domain": "iot.org",
         "status": "testing",
         "version": "1.0",
-        "os": "FreeRTOS",
-        "bg": "lightgray"
+        "os": "FreeRTOS"
     },
     {
         "name": "DroneX",
@@ -146,8 +132,7 @@
         "domain": "drone.tech",
         "status": "in-flight",
         "version": "2.0",
-        "os": "PX4",
-        "bg": "ghostwhite"
+        "os": "PX4"
     },
     {
         "name": "Smartwatch1",
@@ -156,8 +141,7 @@
         "domain": "wearable.net",
         "status": "charging",
         "version": "3.1",
-        "os": "WearOS",
-        "bg": "lightgray"
+        "os": "WearOS"
     },
     {
         "name": "ServerB",
@@ -166,8 +150,7 @@
         "domain": "cloud.net",
         "status": "maintenance",
         "version": "4.5",
-        "os": "CentOS 7",
-        "bg": "ghostwhite"
+        "os": "CentOS 7"
     },
     {
         "name": "WorkstationZ",
@@ -176,8 +159,7 @@
         "domain": "enterprise.com",
         "status": "updating",
         "version": "3.9",
-        "os": "Windows 11",
-        "bg": "lightgray"
+        "os": "Windows 11"
     },
     {
         "name": "SuperComputerA",
@@ -186,8 +168,7 @@
         "domain": "hpc.org",
         "status": "operational",
         "version": "10.0",
-        "os": "Linux Ubuntu HPC",
-        "bg": "ghostwhite"
+        "os": "Linux Ubuntu HPC"
     },
     {
         "name": "DataCenterX",
@@ -196,8 +177,7 @@
         "domain": "datacenter.net",
         "status": "cooling",
         "version": "12.5",
-        "os": "VMware ESXi",
-        "bg": "lightgray"
+        "os": "VMware ESXi"
     },
     {
         "name": "DataCenterX",
@@ -206,7 +186,6 @@
         "domain": "datacenter.net",
         "status": "cooling",
         "version": "12.5",
-        "os": "VMware ESXi",
-        "bg": "lightgray"
+        "os": "VMware ESXi"
     }
 ]

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
-import info from './db.json';
+import data from './db.json';
 import Form from './Form';
 import Navbar from './Navbar';
-import { FaEllipsisV } from "react-icons/fa";
+import { FaEllipsisV, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 export const App = () => {
   function capitalize(str) {
@@ -11,6 +11,9 @@ export const App = () => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
+
+
+  const [info,setInfo]=useState(data);
   const [add, setAdd] = useState(false);
   const [select, setSelect] = useState(false);
 
@@ -18,7 +21,7 @@ export const App = () => {
   const [page, setPage] = useState({start:0, end:1});
 
   const pageRanges = [];
-  for (let i = 0; i <= info.length; i += 5)
+  for (let i = 0; i <= info.length; i += 6)
     pageRanges.push(i);
   if (pageRanges[pageRanges.length - 1] !== info.length)
     pageRanges.push(info.length);
@@ -51,9 +54,8 @@ export const App = () => {
 
   return (
     <div>
-      <Navbar setForm={setAdd} select={select} setSelect={setSelect} handlePrevPageChange={handlePrevPageChange} handleNextPageChange={handleNextPageChange}  />
+      <Navbar setForm={setAdd} select={select} setSelect={setSelect} info={info}/>
       <div className='table'>
-        
         <div className='row' style={{ backgroundColor: "lightblue" }}>
           {["name", "user", "owner", "domain", "status", "version", "os"].map((key) => (
             <div key={key} className='column'>
@@ -73,9 +75,8 @@ export const App = () => {
             <p className='header'>Action</p>
           </div>
         </div>
-
         {filteredData.map((item, index) => (
-          <div key={index} className='row' style={{ backgroundColor: item.bg }}>
+          <div key={index} className='row' style={{ backgroundColor: index % 2 === 0 ? "ghostwhite" : "lightgray" }}>
             <p className='text'>{capitalize(item.name)}</p>
             <p className='text'>{capitalize(item.user)}</p>
             <p className='text'>{capitalize(item.owner)}</p>
@@ -86,9 +87,17 @@ export const App = () => {
             <p className='text'><FaEllipsisV /></p>
           </div>
         ))}
+        <div className='paging'>
+          <div style={{display:"flex",gap:"1rem"}}>
+            <FaArrowLeft onClick={handlePrevPageChange} />
+            <FaArrowRight onClick={handleNextPageChange} />
+          </div>
+          <p>{pageRanges[page.start]+1} to {pageRanges[page.end]}</p>
+        </div>
       </div>
-
-      {add && <Form setForm={setAdd}/>}
+      <div style={{display:"grid",justifyContent:"center",alignContent:"center"}}>
+      {add && <Form setForm={setAdd} info={info} setInfo={setInfo}/>}
+      </div>
     </div>
   );
 };

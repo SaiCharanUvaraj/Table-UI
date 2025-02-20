@@ -74,5 +74,13 @@
 {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+.paging
+{
+    margin-top: 2rem;
+    display: grid;
     justify-items: center;
+    align-items: center;
 }
