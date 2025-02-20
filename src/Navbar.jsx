@@ -1,13 +1,14 @@
 import React from 'react'
-import info from './db.json';
+import { FaTrash } from 'react-icons/fa';
 import { FaSearch,FaSort,FaList} from 'react-icons/fa';
 
-const Navbar = ({setForm,setSelect,select,info}) => {
+const Navbar = ({setForm,setSelect,select,info,setMultiSelect}) => {
   return (
     <div className='navbar'>
       <p className='text' style={{fontWeight:"600"}}>Table Devices: {info.length}</p>
       <div className='operators'>
         <FaSearch onClick={()=>setSelect(!select)} />
+        <FaTrash onClick={()=>setMultiSelect(true)}/>
         <FaSort />
         <FaList />
         <button className='btn' style={{color:"cornflowerblue"}}>Scan all</button>

@@ -3,7 +3,7 @@ import './App.css';
 import data from './db.json';
 import Form from './Form';
 import Navbar from './Navbar';
-import { FaEllipsisV, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaEllipsisV, FaArrowLeft, FaArrowRight, FaRegSquare, FaSquareFull } from "react-icons/fa";
 
 export const App = () => {
   function capitalize(str) {
@@ -11,11 +11,12 @@ export const App = () => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
-
-
   const [info,setInfo]=useState(data);
   const [add, setAdd] = useState(false);
   const [select, setSelect] = useState(false);
+  const [multiSelect,setMultiSelect]=useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
+
 
   const [searchValues, setSearchValues] = useState({name: "", user: "", owner: "", domain: "", status: "", version: "", os: ""});
   const [page, setPage] = useState({start:0, end:1});
@@ -49,12 +50,20 @@ export const App = () => {
   const filteredData = pagedData.filter((item) =>
     Object.keys(searchValues).every((key) =>
       item[key].toLowerCase().includes(searchValues[key].toLowerCase())
-    )
-  );
+  ));
+
+  const handleChoose = (item)=>{
+    const newItems=[...selectedItems,item];
+    setSelectedItems(newItems);
+  }
+  const handleRemoveChoose = (item)=>{
+    const newItems=selectedItems.filter(i=>i!=item);
+    setSelectedItems(newItems);
+  }
 
   return (
     <div>
-      <Navbar setForm={setAdd} select={select} setSelect={setSelect} info={info}/>
+      <Navbar setForm={setAdd} select={select} setSelect={setSelect} info={info} setMultiSelect={setMultiSelect}/>
       <div className='table'>
         <div className='row' style={{ backgroundColor: "lightblue" }}>
           {["name", "user", "owner", "domain", "status", "version", "os"].map((key) => (
@@ -85,6 +94,12 @@ export const App = () => {
             <p className='text'>{capitalize(item.version)}</p>
             <p className='text'>{capitalize(item.os)}</p>
             <p className='text'><FaEllipsisV /></p>
+            {multiSelect && !selectedItems.includes(index) &&
+              <p><FaRegSquare color="blue" onClick={()=>handleChoose(index)} /></p>
+            }
+            {multiSelect && selectedItems.includes(index) &&
+              <p><FaSquareFull color="blue" onClick={()=>handleRemoveChoose(index)} /></p>
+            }
           </div>
         ))}
         <div className='paging'>
