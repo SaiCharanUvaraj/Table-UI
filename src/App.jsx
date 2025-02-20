@@ -15,29 +15,33 @@ export const App = () => {
   const [select, setSelect] = useState(false);
 
   const [searchValues, setSearchValues] = useState({name: "", user: "", owner: "", domain: "", status: "", version: "", os: ""});
-  const [page, setPage] = useState({start:0, end:5});
+  const [page, setPage] = useState({start:0, end:1});
+
+  const pageRanges = [];
+  for (let i = 0; i <= info.length; i += 5)
+    pageRanges.push(i);
+  if (pageRanges[pageRanges.length - 1] !== info.length)
+    pageRanges.push(info.length);
 
   const handleSearchChange = (e, key) => {
     setSearchValues({ ...searchValues, [key]: e.target.value });
   };
+
   const handleNextPageChange = ()=>{
-    if(info.length-page.start<=5)
+    if(page.end===pageRanges.length-1)
       return
-    const nextPage={start:page.start+5,end:page.end+5}
-    if(nextPage.end>info.length)
-      nextPage.end=info.length;
-    setPage(nextPage)
-  }
-  const handlePrevPageChange = ()=>{
-    if(page.end<=5)
-      return
-    const nextPage={start:page.start-5,end:page.end-5}
-    if(nextPage.start<0)
-      nextPage.start=0;
+    const nextPage={start:page.start+1,end:page.end+1}
     setPage(nextPage)
   }
 
-  const pagedData = info.slice(page.start,page.end)
+  const handlePrevPageChange = ()=>{
+    if(page.start===0)
+      return
+    const nextPage={start:page.start-1,end:page.end-1}
+    setPage(nextPage)
+  }
+
+  const pagedData = info.slice(pageRanges[page.start],pageRanges[page.end])
 
   const filteredData = pagedData.filter((item) =>
     Object.keys(searchValues).every((key) =>
