@@ -1,0 +1,212 @@
+[
+    {
+        "name": "DeviceA",
+        "user": "alice789",
+        "owner": "personal",
+        "domain": "xyz.com",
+        "status": "pending",
+        "version": "2.1",
+        "os": "macOS Monterey",
+        "bg": "ghostwhite"
+    },
+    {
+        "name": "DeviceB",
+        "user": "bob567",
+        "owner": "corporate",
+        "domain": "abc.com",
+        "status": "installed",
+        "version": "3.2",
+        "os": "Windows 11",
+        "bg": "lightgray"
+    },
+    {
+        "name": "ServerX",
+        "user": "admin123",
+        "owner": "enterprise",
+        "domain": "cloud.net",
+        "status": "error",
+        "version": "5.0",
+        "os": "Ubuntu 22.04",
+        "bg": "ghostwhite"
+    },
+    {
+        "name": "DeviceC",
+        "user": "charlie999",
+        "owner": "corporate",
+        "domain": "xyz.com",
+        "status": "offline",
+        "version": "1.5",
+        "os": "Windows 10",
+        "bg": "lightgray"
+    },
+    {
+        "name": "RaspberryPi",
+        "user": "devOps42",
+        "owner": "personal",
+        "domain": "iot.local",
+        "status": "active",
+        "version": "4.3",
+        "os": "Raspberry Pi OS",
+        "bg": "ghostwhite"
+    },
+    {
+        "name": "LaptopZ",
+        "user": "eve456",
+        "owner": "corporate",
+        "domain": "abc.com",
+        "status": "installed",
+        "version": "2.8",
+        "os": "Windows 10",
+        "bg": "lightgray"
+    },
+    {
+        "name": "MacBookPro",
+        "user": "steve001",
+        "owner": "personal",
+        "domain": "apple.com",
+        "status": "pending",
+        "version": "3.9",
+        "os": "macOS Ventura",
+        "bg": "ghostwhite"
+    },
+    {
+        "name": "WorkstationX",
+        "user": "david789",
+        "owner": "corporate",
+        "domain": "enterprise.com",
+        "status": "deployed",
+        "version": "4.0",
+        "os": "Windows Server 2019",
+        "bg": "lightgray"
+    },
+    {
+        "name": "TabletP",
+        "user": "mike321",
+        "owner": "corporate",
+        "domain": "mobile.org",
+        "status": "active",
+        "version": "1.8",
+        "os": "Android 12",
+        "bg": "ghostwhite"
+    },
+    {
+        "name": "GamingRig",
+        "user": "gamerX99",
+        "owner": "personal",
+        "domain": "gaming.net",
+        "status": "running",
+        "version": "5.5",
+        "os": "Windows 11",
+        "bg": "lightgray"
+    },
+    {
+        "name": "CloudServerA",
+        "user": "cloudMaster",
+        "owner": "enterprise",
+        "domain": "aws.com",
+        "status": "online",
+        "version": "6.2",
+        "os": "Linux Debian 11",
+        "bg": "ghostwhite"
+    },
+    {
+        "name": "NASDevice",
+        "user": "backupUser",
+        "owner": "corporate",
+        "domain": "backup.local",
+        "status": "idle",
+        "version": "2.3",
+        "os": "Synology DSM 7",
+        "bg": "lightgray"
+    },
+    {
+        "name": "WorkstationY",
+        "user": "lucas777",
+        "owner": "corporate",
+        "domain": "enterprise.com",
+        "status": "offline",
+        "version": "3.4",
+        "os": "Windows 10",
+        "bg": "ghostwhite"
+    },
+    {
+        "name": "EmbeddedSys1",
+        "user": "embeddedDev",
+        "owner": "enterprise",
+        "domain": "iot.org",
+        "status": "testing",
+        "version": "1.0",
+        "os": "FreeRTOS",
+        "bg": "lightgray"
+    },
+    {
+        "name": "DroneX",
+        "user": "pilot44",
+        "owner": "personal",
+        "domain": "drone.tech",
+        "status": "in-flight",
+        "version": "2.0",
+        "os": "PX4",
+        "bg": "ghostwhite"
+    },
+    {
+        "name": "Smartwatch1",
+        "user": "wearableX",
+        "owner": "personal",
+        "domain": "wearable.net",
+        "status": "charging",
+        "version": "3.1",
+        "os": "WearOS",
+        "bg": "lightgray"
+    },
+    {
+        "name": "ServerB",
+        "user": "sysAdmin99",
+        "owner": "enterprise",
+        "domain": "cloud.net",
+        "status": "maintenance",
+        "version": "4.5",
+        "os": "CentOS 7",
+        "bg": "ghostwhite"
+    },
+    {
+        "name": "WorkstationZ",
+        "user": "alex88",
+        "owner": "corporate",
+        "domain": "enterprise.com",
+        "status": "updating",
+        "version": "3.9",
+        "os": "Windows 11",
+        "bg": "lightgray"
+    },
+    {
+        "name": "SuperComputerA",
+        "user": "hpcGuru",
+        "owner": "enterprise",
+        "domain": "hpc.org",
+        "status": "operational",
+        "version": "10.0",
+        "os": "Linux Ubuntu HPC",
+        "bg": "ghostwhite"
+    },
+    {
+        "name": "DataCenterX",
+        "user": "dcAdmin",
+        "owner": "enterprise",
+        "domain": "datacenter.net",
+        "status": "cooling",
+        "version": "12.5",
+        "os": "VMware ESXi",
+        "bg": "lightgray"
+    },
+    {
+        "name": "DataCenterX",
+        "user": "dcAdmin",
+        "owner": "enterprise",
+        "domain": "datacenter.net",
+        "status": "cooling",
+        "version": "12.5",
+        "os": "VMware ESXi",
+        "bg": "lightgray"
+    }
+]
