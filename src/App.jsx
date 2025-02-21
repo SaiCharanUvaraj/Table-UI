@@ -61,9 +61,17 @@ export const App = () => {
     setSelectedItems(newItems);
   }
 
+  const handleDelete = ()=>{
+    if(selectedItems.length===0)
+      return
+    alert(`${selectedItems.length}will be deleted !`);
+    const newItems=info.filter((item)=>!selectedItems.includes(item.index))
+    setInfo(newItems);
+  }
+
   return (
     <div>
-      <Navbar setForm={setAdd} select={select} setSelect={setSelect} info={info} setMultiSelect={setMultiSelect}/>
+      <Navbar setForm={setAdd} select={select} setSelect={setSelect} info={info} setMultiSelect={setMultiSelect} handleDelete={handleDelete}/>
       <div className='table'>
         <div className='row' style={{ backgroundColor: "lightblue" }}>
           {["name", "user", "owner", "domain", "status", "version", "os"].map((key) => (
@@ -84,9 +92,17 @@ export const App = () => {
             <p className='header'>Action</p>
           </div>
         </div>
-        {filteredData.map((item, index) => (
-          <div key={index} className='row' style={{ backgroundColor: index % 2 === 0 ? "ghostwhite" : "lightgray" }}>
-            <p className='text'>{capitalize(item.name)}</p>
+        {filteredData.map((item) => (
+          <div key={item.index} className='row' style={{ backgroundColor: item.index % 2 === 0 ? "ghostwhite" : "lightgray" }}>
+            <p className='text' style={{display:"flex",alignItems:"center",gap:"1rem"}}>
+              {multiSelect && !selectedItems.includes(item.index) &&
+                <p><FaRegSquare color="blue" onClick={()=>handleChoose(item.index)} /></p>
+              }
+              {multiSelect && selectedItems.includes(item.index) &&
+                <p><FaSquareFull color="blue" onClick={()=>handleRemoveChoose(item.index)} /></p>
+              }
+              {capitalize(item.name)}
+            </p>
             <p className='text'>{capitalize(item.user)}</p>
             <p className='text'>{capitalize(item.owner)}</p>
             <p className='text'>{capitalize(item.domain)}</p>
@@ -94,15 +110,12 @@ export const App = () => {
             <p className='text'>{capitalize(item.version)}</p>
             <p className='text'>{capitalize(item.os)}</p>
             <p className='text'><FaEllipsisV /></p>
-            {multiSelect && !selectedItems.includes(index) &&
-              <p><FaRegSquare color="blue" onClick={()=>handleChoose(index)} /></p>
-            }
-            {multiSelect && selectedItems.includes(index) &&
-              <p><FaSquareFull color="blue" onClick={()=>handleRemoveChoose(index)} /></p>
-            }
           </div>
         ))}
         <div className='paging'>
+            {multiSelect &&
+              <p>{selectedItems.length} items selected</p>
+            }
           <div style={{display:"flex",gap:"1rem"}}>
             <FaArrowLeft onClick={handlePrevPageChange} />
             <FaArrowRight onClick={handleNextPageChange} />
