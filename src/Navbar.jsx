@@ -2,14 +2,14 @@ import React from 'react'
 import { FaRegSquare, FaTrash } from 'react-icons/fa';
 import { FaSearch,FaSort,FaList} from 'react-icons/fa';
 
-const Navbar = ({setForm,setSelect,select,info,setMultiSelect,handleDelete}) => {
+const Navbar = ({setForm,setSelect,select,info,setMultiSelect,handleDelete,multiSelect}) => {
   return (
     <div className='navbar'>
       <p className='text' style={{fontWeight:"600"}}>Table Devices: {info.length}</p>
       <div className='operators'>
         <FaSearch onClick={()=>setSelect(!select)} />
         <FaTrash onClick={handleDelete}/>
-        <FaRegSquare onClick={()=>setMultiSelect(true)}/>
+        <FaRegSquare onClick={()=>setMultiSelect(!multiSelect)}/>
         <FaSort />
         <FaList />
         <button className='btn' style={{color:"cornflowerblue"}}>Scan all</button>

@@ -67,11 +67,12 @@ export const App = () => {
     alert(`${selectedItems.length}will be deleted !`);
     const newItems=info.filter((item)=>!selectedItems.includes(item.index))
     setInfo(newItems);
+    setSelectedItems([]);
   }
 
   return (
     <div>
-      <Navbar setForm={setAdd} select={select} setSelect={setSelect} info={info} setMultiSelect={setMultiSelect} handleDelete={handleDelete}/>
+      <Navbar setForm={setAdd} select={select} setSelect={setSelect} info={info} setMultiSelect={setMultiSelect} handleDelete={handleDelete} multiSelect={multiSelect}/>
       <div className='table'>
         <div className='row' style={{ backgroundColor: "lightblue" }}>
           {["name", "user", "owner", "domain", "status", "version", "os"].map((key) => (
