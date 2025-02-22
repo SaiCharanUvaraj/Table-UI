@@ -1,7 +1,6 @@
 [
     {
         "name": "DeviceA",
-        "index":0,
         "user": "alice789",
         "owner": "personal",
         "domain": "xyz.com",
@@ -11,7 +10,6 @@
     },
     {
         "name": "DeviceB",
-        "index":1,
         "user": "bob567",
         "owner": "corporate",
         "domain": "abc.com",
@@ -21,7 +19,6 @@
     },
     {
         "name": "ServerX",
-        "index":2,
         "user": "admin123",
         "owner": "enterprise",
         "domain": "cloud.net",
@@ -31,7 +28,6 @@
     },
     {
         "name": "DeviceC",
-        "index":3,
         "user": "charlie999",
         "owner": "corporate",
         "domain": "xyz.com",
@@ -41,7 +37,6 @@
     },
     {
         "name": "RaspberryPi",
-        "index":4,
         "user": "devOps42",
         "owner": "personal",
         "domain": "iot.local",
@@ -51,7 +46,6 @@
     },
     {
         "name": "LaptopZ",
-        "index":5,
         "user": "eve456",
         "owner": "corporate",
         "domain": "abc.com",
@@ -61,7 +55,6 @@
     },
     {
         "name": "MacBookPro",
-        "index":6,
         "user": "steve001",
         "owner": "personal",
         "domain": "apple.com",
@@ -71,7 +64,6 @@
     },
     {
         "name": "WorkstationX",
-        "index":7,
         "user": "david789",
         "owner": "corporate",
         "domain": "enterprise.com",
@@ -81,7 +73,6 @@
     },
     {
         "name": "TabletP",
-        "index":8,
         "user": "mike321",
         "owner": "corporate",
         "domain": "mobile.org",
@@ -91,7 +82,6 @@
     },
     {
         "name": "GamingRig",
-        "index":9,
         "user": "gamerX99",
         "owner": "personal",
         "domain": "gaming.net",
@@ -101,7 +91,6 @@
     },
     {
         "name": "CloudServerA",
-        "index":10,
         "user": "cloudMaster",
         "owner": "enterprise",
         "domain": "aws.com",
@@ -111,7 +100,6 @@
     },
     {
         "name": "NASDevice",
-        "index":11,
         "user": "backupUser",
         "owner": "corporate",
         "domain": "backup.local",
@@ -121,7 +109,6 @@
     },
     {
         "name": "WorkstationY",
-        "index":12,
         "user": "lucas777",
         "owner": "corporate",
         "domain": "enterprise.com",
@@ -131,7 +118,6 @@
     },
     {
         "name": "EmbeddedSys1",
-        "index":13,
         "user": "embeddedDev",
         "owner": "enterprise",
         "domain": "iot.org",
@@ -141,7 +127,6 @@
     },
     {
         "name": "DroneX",
-        "index":14,
         "user": "pilot44",
         "owner": "personal",
         "domain": "drone.tech",
@@ -151,7 +136,6 @@
     },
     {
         "name": "Smartwatch1",
-        "index":15,
         "user": "wearableX",
         "owner": "personal",
         "domain": "wearable.net",
@@ -161,7 +145,6 @@
     },
     {
         "name": "ServerB",
-        "index":16,
         "user": "sysAdmin99",
         "owner": "enterprise",
         "domain": "cloud.net",
@@ -171,7 +154,6 @@
     },
     {
         "name": "WorkstationZ",
-        "index":17,
         "user": "alex88",
         "owner": "corporate",
         "domain": "enterprise.com",
@@ -181,7 +163,6 @@
     },
     {
         "name": "SuperComputerA",
-        "index":18,
         "user": "hpcGuru",
         "owner": "enterprise",
         "domain": "hpc.org",
@@ -191,17 +172,6 @@
     },
     {
         "name": "DataCenterX",
-        "index":19,
-        "user": "dcAdmin",
-        "owner": "enterprise",
-        "domain": "datacenter.net",
-        "status": "cooling",
-        "version": "12.5",
-        "os": "VMware ESXi"
-    },
-    {
-        "name": "DataCenterX",
-        "index":20,
         "user": "dcAdmin",
         "owner": "enterprise",
         "domain": "datacenter.net",

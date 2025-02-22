@@ -2,7 +2,7 @@
 {
     display: flex;
     flex-direction: column;
-    margin-top:1rem;
+    margin-top:0.5rem;
     background-color: ghostwhite;
 }
 .navbar
@@ -19,7 +19,15 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    font-size: large;
     gap:1rem;
+}
+.nav-buttons
+{
+    border: 2px black solid;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
 }
 .row
 {
@@ -34,7 +42,7 @@
     text-align: left;
     font-weight: 500;
     font-size: larger;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Calibri;
 }
 .header
 {
@@ -42,7 +50,7 @@
     font-weight: 600;
     font-size:larger;
     color:dimgray;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Calibri;
 }
 .btn
 {
@@ -77,10 +85,32 @@
     justify-content: center;
     align-content: center;
 }
-.paging
+.paging 
 {
-    margin-top: 2rem;
-    display: grid;
-    justify-items: center;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end; 
+    gap:1rem;
     align-items: center;
+}
+
+.bold-large
+{
+    font-size: large;
+    font-weight: bold;
+    font-family:Calibri;
+}
+
+.sort-icon {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.sortable-header:hover .sort-icon {
+    opacity: 1;
+}
+
+.shadow
+{
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
