@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
 import data from './db.json';
-import Form from './Form';
 import Navbar from './Navbar';
 import {FaArrowLeft, FaArrowRight, FaRegSquare, FaSort, FaSortUp, FaSortDown, FaCheckSquare, FaTrash } from "react-icons/fa";
 
@@ -19,6 +18,7 @@ export const App = () => {
   const [searchValues, setSearchValues] = useState({ name: "", user: "", owner: "", domain: "", status: "", version: "", os: "" });
   const [page, setPage] = useState({ start: 0, end: 1 });
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+  const [selectedColumns,setSelectedColumns]=useState(Object.keys(info[0]));
 
   /* sorting functionalities.... */
   const handleSort = (key) => {
@@ -85,6 +85,7 @@ export const App = () => {
     setSelectedItems(selectedItems.filter(i => i !== item));
   };
 
+  /*Multi selection delete..... */
   const handleDelete = () => {
     if (selectedItems.length === 0) return;
     alert(`${selectedItems.length} will be deleted!`);
@@ -93,12 +94,15 @@ export const App = () => {
     setMultiSelect(false);
   };
 
+  /*column choosing funtionalities... */
+  const columns=Object.keys(info[0]);
+
   return (
     <div>
-      <Navbar select={select} setSelect={setSelect} info={info} setMultiSelect={setMultiSelect} handleDelete={handleDelete} multiSelect={multiSelect} />
+      <Navbar select={select} setSelect={setSelect} info={info} setMultiSelect={setMultiSelect} handleDelete={handleDelete} multiSelect={multiSelect} columns={columns} selectedColumns={selectedColumns} setSelectedColumns={setSelectedColumns} setInfo={setInfo} />
       <div className='table'>
         <div className='row' style={{ backgroundColor: "lightblue" }}>
-          {["name", "user", "owner", "domain", "status", "version", "os"].map((key) => (
+          {selectedColumns.map((key) => (
             <div key={key} className='column' style={{ cursor: "pointer" }}>
               <div style={{ display: "flex", gap: "0.5rem", justifyContent: "flex-start", alignItems: "center" }} className="sortable-header" onClick={() => handleSort(key)}>
                 <p className='header'>{capitalize(key)}</p>
@@ -126,17 +130,14 @@ export const App = () => {
               }
               {capitalize(item.name)}
             </p>
-            <p className='text'>{capitalize(item.user)}</p>
-            <p className='text'>{capitalize(item.owner)}</p>
-            <p className='text'>{capitalize(item.domain)}</p>
-            <p className='text'>{capitalize(item.status)}</p>
-            <p className='text'>{capitalize(item.version)}</p>
-            <p className='text'>{capitalize(item.os)}</p>
+            {selectedColumns.filter((key)=>key!=columns[0]).map((key) => (
+              <p key={key} className='text'>{capitalize(item[key])}</p>))
+            }
+            
             <p className='text' style={{textAlign:"center"}}><FaTrash /></p>
           </div>
         ))}
         <div className='paging'>
-          <p className='bold-large' style={{ color: "darkgray" }}>Rows per Page: 6</p>
           <p className='bold-large'>{pageRanges[page.start] + 1} - {pageRanges[page.end]} of {info.length}</p>
           <div className='bold-large' style={{ display: "flex", gap: "1rem" }}>
             <FaArrowLeft onClick={handlePrevPageChange} />

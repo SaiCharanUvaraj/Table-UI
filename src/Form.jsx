@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Form = ({ setForm, info, setInfo }) => {
+const Form = ({ info, setInfo }) => {
     const [formData, setFormData] = useState({
         name: "",
         user: "",
@@ -20,9 +20,8 @@ const Form = ({ setForm, info, setInfo }) => {
     const handleAdd = (e) => {
         e.preventDefault();
         const newData = [...info, formData];
-        setInfo(newData);
         alert("Item added");
-        setForm(false);
+        setInfo(newData);
     };
 
     return (

@@ -1,33 +1,45 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaFileExport, FaRegSquare, FaTrash, FaSearch, FaPlus } from "react-icons/fa";
-import xlsx from "json-as-xlsx";
+import { FaFileExport, FaRegSquare, FaTrash, FaSearch, FaPlus, FaList, FaCheckSquare } from "react-icons/fa";
+import Form from './Form';
+import exportFile from "./ExportFile.js";
 
-const Navbar = ({ setSelect, select, info, setMultiSelect, handleDelete, multiSelect }) => {
-  const dropdownStyle={ position: "absolute", top: "50px", right: "10px", background: "#fff", boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", borderRadius: "8px", zIndex: 1000, padding: "10px"};
-  const [showDropdown, setShowDropdown] = useState(false);
-  const dropdownRef = useRef(null);
-
-  const exportFile = () => {
-    const columns = Object.keys(info[0]).map((key) => ({
-      label: key.charAt(0).toUpperCase() + key.slice(1),
-      value: key,
-    }));
-    const formatedInfo = [{ sheet: "Sheet1", columns, content: info }];
-    const settings = {
-      fileName: "MySpreadsheet",
-      extraLength: 3,
-      writeMode: "writeFile",
-      writeOptions: {},
-      RTL: true,
-    };
-    xlsx(formatedInfo, settings);
+const Navbar = ({ setSelect, select, info, setMultiSelect, handleDelete, multiSelect, columns, selectedColumns,setSelectedColumns, setInfo}) => {
+  const dropdownStyle = {
+    position: "absolute",
+    top: "50px",
+    right: "10px",
+    background: "#fff",
+    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+    borderRadius: "8px",
+    zIndex: 1000,
+    padding: "10px",
   };
 
-  // Close dropdown when clicking outside
+  const [colDropdown, setColDropdown] = useState(false);
+  const [addDropdown, setAddDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
+  function capitalize(str) {
+    return str ? str.charAt(0).toUpperCase() + str.slice(1) : "";
+  }
+
+  const removeColumns=(item) =>{
+    if(item===columns[0])
+      return
+    const newColumns=selectedColumns.filter((x)=>item!=x);
+    setSelectedColumns(newColumns);
+  }
+  const addColumns=(item) =>{
+    const newColumns=[...selectedColumns,item];
+    setSelectedColumns(newColumns);
+  }
+
+  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowDropdown(false);
+        setColDropdown(false);
+        setAddDropdown(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -45,11 +57,29 @@ const Navbar = ({ setSelect, select, info, setMultiSelect, handleDelete, multiSe
         <FaSearch onClick={() => setSelect(!select)} className="nav-buttons" />
         <FaTrash onClick={handleDelete} className="nav-buttons" />
         <FaRegSquare onClick={() => setMultiSelect(!multiSelect)} className="nav-buttons" />
-        <FaFileExport onClick={exportFile} className="nav-buttons" />
-        <FaPlus onClick={() => setShowDropdown(!showDropdown)} className="nav-buttons" />
-        {showDropdown && (
+        <FaFileExport onClick={() => exportFile(info)} className="nav-buttons" />
+        
+        <FaList onClick={() => setColDropdown(!colDropdown)} className="nav-buttons" />
+        {colDropdown && (
           <div ref={dropdownRef} className="shadow" style={dropdownStyle}>
-            <p>Column Choosing</p>
+            <p className="bold-large">Choose Columns</p>
+            <div style={{maxHeight: columns.length > 4 ? "200px" : "auto", overflowY: columns.length > 4 ? "auto" : "hidden"}}>
+              {columns.map((item, index) => (
+                <div style={{display:"flex", alignItems:"center",gap:"0.5rem"}} key={index}>
+                  {selectedColumns.includes(item) && <FaCheckSquare onClick={()=>removeColumns(item)} />}
+                  {!selectedColumns.includes(item) && <FaRegSquare onClick={()=>addColumns(item)} />}
+                  <p>{capitalize(item)}</p>
+                </div>
+              ))}
+            </div>
+            <p>{columns.length} columns chosen</p>
+          </div>
+        )}
+
+        <FaPlus onClick={() => setAddDropdown(!addDropdown)} className="nav-buttons" />
+        {addDropdown && (
+          <div ref={dropdownRef} className="shadow" style={dropdownStyle}>
+            <Form info={info} setInfo={setInfo} />
           </div>
         )}
       </div>
