@@ -53,7 +53,7 @@
     text-align: left;
     font-weight: 600;
     font-size:larger;
-    color:dimgray;
+    color:#717276;
     font-family: Calibri;
 }
 .btn
@@ -66,8 +66,9 @@
     width:7rem;
     height: 1.5rem;
     border-radius: 0.5rem;
-    border: 1px black solid;
+    border: 1px #648dc1 solid;
     text-align: center;
+    color:#648dc1
 }
 
 .formPart

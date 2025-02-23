@@ -21,6 +21,16 @@ export const App = () => {
   const [selectedColumns,setSelectedColumns]=useState(Object.keys(info[0]));
   const [pageRows,setPageRows]=useState(8);
 
+  const columns=Object.keys(info[0]);
+
+  const rowStyle = {
+    display: "grid",
+    gridTemplateColumns: `repeat(${columns.length+1}, 1fr)`,
+    backgroundColor: "gainsboro",
+    padding: "0.1rem",
+    border: "1px lightgrey solid"
+  };
+
   /* sorting functionalities.... */
   const handleSort = (key) => {
     setSortConfig((prev) => ({ key, direction: prev.key === key && prev.direction === 'asc' ? 'desc' : 'asc', }));
@@ -111,20 +121,17 @@ export const App = () => {
     setInfo(indexedData.filter(item => item.index!==key));
   }
 
-  /*column choosing funtionalities... */
-  const columns=Object.keys(info[0]);
-
   return (
     <div>
       <Navbar select={select} setSelect={setSelect} info={info} handleDelete={handleDelete} columns={columns} selectedColumns={selectedColumns} setSelectedColumns={setSelectedColumns} setInfo={setInfo} />
       <div className='table'>
-        <div className='row' style={{ backgroundColor: "lightblue" }}>
+        <div className='row' style={{ ...rowStyle, backgroundColor: "#f1f4fb" }}>
           {selectedColumns.map((key) => (
             <div key={key} className='column'>
               <div style={{ display: "flex", gap: "0.5rem", justifyContent: "flex-start", alignItems: "center" }} className="sortable-header">
                 {key===columns[0]?
                   <div style={{display:"flex",alignItems:"center", gap: "1rem"}}>
-                    <FaRegSquare style={{ cursor: "pointer" }} color='dimgray' onClick={()=>setMultiSelect(!multiSelect)}/>
+                    <FaRegSquare style={{ cursor: "pointer" }} color='#717276' onClick={()=>setMultiSelect(!multiSelect)}/>
                     <p className='header' onClick={() => handleSort(key)} style={{ cursor: "pointer" }}>{capitalize(key)}</p>
                   </div>
                   :
@@ -142,7 +149,7 @@ export const App = () => {
           </div>
         </div>
         {finalData.map((item) => (
-          <div key={item.index} className='row' style={{ backgroundColor: item.index % 2 === 0 ? "ghostwhite" : "lightgray" }} 
+          <div key={item.index} className='row' style={{...rowStyle, backgroundColor: item.index % 2 === 0 ? "#ffffff" : "#fafafa" }} 
           onClick={()=>setSortConfig({ key: null, direction: 'asc' })}>
             <p className='text' style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
               {multiSelect && !selectedItems.includes(item.index) &&
