@@ -3,11 +3,12 @@ import { FaFileExport, FaRegSquare, FaTrash, FaSearch, FaPlus, FaList, FaCheckSq
 import Form from './Form';
 import exportFile from "./ExportFile.js";
 
-const Navbar = ({ setSelect, select, info, setMultiSelect, handleDelete, multiSelect, columns, selectedColumns,setSelectedColumns, setInfo}) => {
+const Navbar = ({ setSelect, select, info, handleDelete, columns, selectedColumns,setSelectedColumns, setInfo}) => {
   const dropdownStyle = {
     position: "absolute",
     top: "50px",
     right: "10px",
+    width: "300px",
     background: "#fff",
     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
     borderRadius: "8px",
@@ -17,21 +18,38 @@ const Navbar = ({ setSelect, select, info, setMultiSelect, handleDelete, multiSe
 
   const [colDropdown, setColDropdown] = useState(false);
   const [addDropdown, setAddDropdown] = useState(false);
+  const [wantedColumns,setWantedColumns]=useState([])
   const dropdownRef = useRef(null);
 
   function capitalize(str) {
     return str ? str.charAt(0).toUpperCase() + str.slice(1) : "";
   }
 
-  const removeColumns=(item) =>{
+  const selectColumns=(item) =>{
     if(item===columns[0])
       return
-    const newColumns=selectedColumns.filter((x)=>item!=x);
-    setSelectedColumns(newColumns);
+    const cols=[...wantedColumns,item]
+    setWantedColumns(cols);
   }
-  const addColumns=(item) =>{
-    const newColumns=[...selectedColumns,item];
-    setSelectedColumns(newColumns);
+
+  const deSelectColumns=(item) =>{
+    if(item===columns[0])
+      return
+    const cols=wantedColumns.filter((x)=>item!=x);
+    setWantedColumns(cols);
+  }
+
+  const applyColumns =()=>{
+    if(wantedColumns.length===0)
+      return;
+    let cols = columns.filter(item => wantedColumns.includes(item));
+    cols=[columns[0],...cols];
+    setSelectedColumns(cols);
+  }
+
+  const resetColumns =()=>{
+    setSelectedColumns(columns);
+    setWantedColumns([]);
   }
 
   // Close dropdowns when clicking outside
@@ -56,7 +74,6 @@ const Navbar = ({ setSelect, select, info, setMultiSelect, handleDelete, multiSe
       <div className="operators">
         <FaSearch onClick={() => setSelect(!select)} className="nav-buttons" />
         <FaTrash onClick={handleDelete} className="nav-buttons" />
-        <FaRegSquare onClick={() => setMultiSelect(!multiSelect)} className="nav-buttons" />
         <FaFileExport onClick={() => exportFile(info)} className="nav-buttons" />
         
         <FaList onClick={() => setColDropdown(!colDropdown)} className="nav-buttons" />
@@ -66,13 +83,17 @@ const Navbar = ({ setSelect, select, info, setMultiSelect, handleDelete, multiSe
             <div style={{maxHeight: columns.length > 4 ? "200px" : "auto", overflowY: columns.length > 4 ? "auto" : "hidden"}}>
               {columns.map((item, index) => (
                 <div style={{display:"flex", alignItems:"center",gap:"0.5rem"}} key={index}>
-                  {selectedColumns.includes(item) && <FaCheckSquare onClick={()=>removeColumns(item)} />}
-                  {!selectedColumns.includes(item) && <FaRegSquare onClick={()=>addColumns(item)} />}
+                  {wantedColumns.includes(item) && <FaCheckSquare onClick={()=>deSelectColumns(item)} />}
+                  {!wantedColumns.includes(item) && <FaRegSquare onClick={()=>selectColumns(item)} />}
                   <p>{capitalize(item)}</p>
                 </div>
               ))}
             </div>
-            <p>{columns.length} columns chosen</p>
+            <div style={{display:"flex",alignItems:"center", gap: "0.1rem"}}>
+              <p style={{fontSize:"small"}}>{wantedColumns.length} columns</p>
+              <button onClick={applyColumns} className="btn">Apply</button>
+              <button onClick={resetColumns} className="btn">Reset</button>
+            </div>
           </div>
         )}
 

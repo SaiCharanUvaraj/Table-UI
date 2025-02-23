@@ -19,6 +19,7 @@ export const App = () => {
   const [page, setPage] = useState({ start: 0, end: 1 });
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
   const [selectedColumns,setSelectedColumns]=useState(Object.keys(info[0]));
+  const [pageRows,setPageRows]=useState(8);
 
   /* sorting functionalities.... */
   const handleSort = (key) => {
@@ -40,7 +41,7 @@ export const App = () => {
 
   /* Paging functionalities... */
   const pageRanges = [];
-  for (let i = 0; i <= info.length; i += 10)
+  for (let i = 0; i <= info.length; i += pageRows)
     pageRanges.push(i);
   if (pageRanges[pageRanges.length - 1] !== info.length)
     pageRanges.push(info.length);
@@ -54,6 +55,17 @@ export const App = () => {
     if (page.start === 0) return;
     setPage({ start: page.start - 1, end: page.end - 1 });
   };
+
+  const incPageRows =() =>{
+    if(pageRows===15)
+      return;
+    setPageRows(pageRows+1);
+  }
+  const decPageRows =() =>{
+    if(pageRows===5)
+      return;
+    setPageRows(pageRows-1);
+  }
 
   const pagedData = sortedData.slice(pageRanges[page.start], pageRanges[page.end]);
 
@@ -94,23 +106,34 @@ export const App = () => {
     setMultiSelect(false);
   };
 
+  const handleActionDelete =(key)=>{
+    alert("The item will be deleted!");
+    setInfo(indexedData.filter(item => item.index!==key));
+  }
+
   /*column choosing funtionalities... */
   const columns=Object.keys(info[0]);
 
   return (
     <div>
-      <Navbar select={select} setSelect={setSelect} info={info} setMultiSelect={setMultiSelect} handleDelete={handleDelete} multiSelect={multiSelect} columns={columns} selectedColumns={selectedColumns} setSelectedColumns={setSelectedColumns} setInfo={setInfo} />
+      <Navbar select={select} setSelect={setSelect} info={info} handleDelete={handleDelete} columns={columns} selectedColumns={selectedColumns} setSelectedColumns={setSelectedColumns} setInfo={setInfo} />
       <div className='table'>
         <div className='row' style={{ backgroundColor: "lightblue" }}>
           {selectedColumns.map((key) => (
-            <div key={key} className='column' style={{ cursor: "pointer" }}>
-              <div style={{ display: "flex", gap: "0.5rem", justifyContent: "flex-start", alignItems: "center" }} className="sortable-header" onClick={() => handleSort(key)}>
-                <p className='header'>{capitalize(key)}</p>
+            <div key={key} className='column'>
+              <div style={{ display: "flex", gap: "0.5rem", justifyContent: "flex-start", alignItems: "center" }} className="sortable-header">
+                {key===columns[0]?
+                  <div style={{display:"flex",alignItems:"center", gap: "1rem"}}>
+                    <FaRegSquare style={{ cursor: "pointer" }} color='dimgray' onClick={()=>setMultiSelect(!multiSelect)}/>
+                    <p className='header' onClick={() => handleSort(key)} style={{ cursor: "pointer" }}>{capitalize(key)}</p>
+                  </div>
+                  :
+                  <p className='header' onClick={() => handleSort(key)} style={{ cursor: "pointer" }}>{capitalize(key)}</p>}
                 {sortConfig.key === key ? (sortConfig.direction === 'asc' ? <button style={{ cursor: "pointer" }}>sort-desc</button> : <button style={{ cursor: "pointer" }}>sort-asc</button>):""}
                 {sortConfig.key === key ? ( sortConfig.direction === 'asc' ? <FaSortUp /> : <FaSortDown /> ) : ( <FaSort className='sort-icon' /> )}
               </div>
               {select &&
-                <input type="text" placeholder={`Search ${capitalize(key)}`} value={searchValues[key]} onChange={(e) => handleSearchChange(e, key)} style={{width:"80%",height:"1.5rem"}}/>
+                <input type="text" placeholder={`Search ${capitalize(key)}`} value={searchValues[key]} onChange={(e) => handleSearchChange(e, key)} style={{width:"80%",height:"1.5rem",marginBottom:"0.5rem"}}/>
               }
             </div>
           ))}
@@ -123,10 +146,10 @@ export const App = () => {
           onClick={()=>setSortConfig({ key: null, direction: 'asc' })}>
             <p className='text' style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
               {multiSelect && !selectedItems.includes(item.index) &&
-                <FaRegSquare color="blue" onClick={() => handleChoose(item.index)} />
+                <FaRegSquare color="blue" onClick={() => handleChoose(item.index)} style={{ cursor: "pointer" }}/>
               }
               {multiSelect && selectedItems.includes(item.index) &&
-                <FaCheckSquare color="blue" onClick={() => handleRemoveChoose(item.index)} />
+                <FaCheckSquare color="blue" onClick={() => handleRemoveChoose(item.index)} style={{ cursor: "pointer" }}/>
               }
               {capitalize(item.name)}
             </p>
@@ -134,15 +157,20 @@ export const App = () => {
               <p key={key} className='text'>{capitalize(item[key])}</p>))
             }
             
-            <p className='text' style={{textAlign:"center"}}><FaTrash /></p>
+            <p className='text' style={{textAlign:"center"}}><FaTrash onClick={()=>handleActionDelete(item.index)} style={{ cursor: "pointer" }}/></p>
           </div>
         ))}
-        <div className='paging'>
-          <p className='bold-large'>{pageRanges[page.start] + 1} - {pageRanges[page.end]} of {info.length}</p>
-          <div className='bold-large' style={{ display: "flex", gap: "1rem" }}>
-            <FaArrowLeft onClick={handlePrevPageChange} />
-            <FaArrowRight onClick={handleNextPageChange} />
-          </div>
+      </div>
+      <div className='paging'>
+        <p className='bold-large'>Rows per Page: {pageRows}</p>
+        <div style={{display:"grid"}} className='bold-large'>
+          <FaSortUp onClick={incPageRows} style={{ cursor: "pointer" }} />
+          <FaSortDown onClick={decPageRows} style={{ cursor: "pointer" }} />
+        </div>
+        <p className='bold-large'>{pageRanges[page.start] + 1} - {pageRanges[page.end]} of {info.length}</p>
+        <div className='bold-large' style={{ display: "flex", gap: "1rem" }}>
+          <FaArrowLeft onClick={handlePrevPageChange} style={{ cursor: "pointer" }} />
+          <FaArrowRight onClick={handleNextPageChange} style={{ cursor: "pointer" }} />
         </div>
       </div>
     </div>
