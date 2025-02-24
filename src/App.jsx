@@ -13,13 +13,12 @@ export const App = () => {
   /*useStates .... */
   const [info, setInfo] = useState(data);
   const [select, setSelect] = useState(false);
-  const [multiSelect, setMultiSelect] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
   const [searchValues, setSearchValues] = useState({ name: "", user: "", owner: "", domain: "", status: "", version: "", os: "" });
   const [page, setPage] = useState({ start: 0, end: 1 });
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
   const [selectedColumns,setSelectedColumns]=useState(Object.keys(info[0]));
-  const [pageRows,setPageRows]=useState(8);
+  const [pageRows,setPageRows]=useState(10);
 
   const columns=Object.keys(info[0]);
 
@@ -28,7 +27,8 @@ export const App = () => {
     gridTemplateColumns: `repeat(${columns.length+1}, 1fr)`,
     backgroundColor: "gainsboro",
     padding: "0.1rem",
-    border: "1px lightgrey solid"
+    paddingLeft:"1.5rem",
+    border: "0.5px lightgrey solid"
   };
 
   /* sorting functionalities.... */
@@ -111,14 +111,15 @@ export const App = () => {
   const handleDelete = () => {
     if (selectedItems.length === 0) return;
     alert(`${selectedItems.length} will be deleted!`);
-    setInfo(indexedData.filter(item => !selectedItems.includes(item.index)));
+    const updatedInfo=indexedData.filter(item => !selectedItems.includes(item.index));
+    setInfo(updatedInfo.map(({ index, ...rest }) => rest));
     setSelectedItems([]);
-    setMultiSelect(false);
   };
 
   const handleActionDelete =(key)=>{
     alert("The item will be deleted!");
-    setInfo(indexedData.filter(item => item.index!==key));
+    const updatedInfo=indexedData.filter(item => item.index!==key);
+    setInfo(updatedInfo.map(({ index, ...rest }) => rest));
   }
 
   return (
@@ -131,7 +132,7 @@ export const App = () => {
               <div style={{ display: "flex", gap: "0.5rem", justifyContent: "flex-start", alignItems: "center" }} className="sortable-header">
                 {key===columns[0]?
                   <div style={{display:"flex",alignItems:"center", gap: "1rem"}}>
-                    <FaRegSquare style={{ cursor: "pointer" }} color='#717276' onClick={()=>setMultiSelect(!multiSelect)}/>
+                    <FaRegSquare color='#717276'/>
                     <p className='header' onClick={() => handleSort(key)} style={{ cursor: "pointer" }}>{capitalize(key)}</p>
                   </div>
                   :
@@ -149,13 +150,13 @@ export const App = () => {
           </div>
         </div>
         {finalData.map((item) => (
-          <div key={item.index} className='row' style={{...rowStyle, backgroundColor: item.index % 2 === 0 ? "#ffffff" : "#fafafa" }} 
+          <div key={item.index} className='row' style={{...rowStyle, backgroundColor: item.index % 2 === 0 ? "#ffffff" : "#F0F0F0" }} 
           onClick={()=>setSortConfig({ key: null, direction: 'asc' })}>
-            <p className='text' style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              {multiSelect && !selectedItems.includes(item.index) &&
-                <FaRegSquare color="blue" onClick={() => handleChoose(item.index)} style={{ cursor: "pointer" }}/>
+            <p className='text hover-container' style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              {!selectedItems.includes(item.index) &&
+                <FaRegSquare color="blue" className='hover-icon' onClick={() => handleChoose(item.index)} style={{ cursor: "pointer" }}/>
               }
-              {multiSelect && selectedItems.includes(item.index) &&
+              {selectedItems.includes(item.index) &&
                 <FaCheckSquare color="blue" onClick={() => handleRemoveChoose(item.index)} style={{ cursor: "pointer" }}/>
               }
               {capitalize(item.name)}
@@ -163,7 +164,6 @@ export const App = () => {
             {selectedColumns.filter((key)=>key!=columns[0]).map((key) => (
               <p key={key} className='text'>{capitalize(item[key])}</p>))
             }
-            
             <p className='text' style={{textAlign:"center"}}><FaTrash onClick={()=>handleActionDelete(item.index)} style={{ cursor: "pointer" }}/></p>
           </div>
         ))}
