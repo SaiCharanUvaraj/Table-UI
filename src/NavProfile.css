@@ -1,0 +1,48 @@
+.link
+{
+    font-size: medium;
+    color:#527db0;
+    font-family:"Calibri"
+}
+.link:hover
+{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.nav
+{
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start; 
+    padding: 0 20px;
+}
+.list
+{
+    padding: 10px 20px;
+    font-size: large;
+    font-family: Calibri;
+    font-weight:500;
+    border-radius:5px;
+    cursor: pointer;
+}
+.list:hover
+{
+    background-color: #e0f0fd;
+}
+.button
+{
+    color:#317bde;
+    padding: 5px 20px;
+    border: 1px solid #317bde;
+    background-color: white;
+    border-radius: 50px;
+    font-size: large;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+.button:hover
+{
+    background-color: #317bde;
+    color:white;
+    transition-duration: 0.2s;
+}
